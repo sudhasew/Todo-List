@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="title">Todos</h1>
+      <input type="text" id="filter-todo" placeholder="search todos ..." />
+    </header>
+    <form id="my-form">
+      <input type="text" id="todo-text" placeholder="add todo ..." />
+      <input type="submit" value="Add" id="submit" />
+    </form>
+    <div class="todo-container">
+      <h2 id="todoTitle">Todo List</h2>
+      <ul id="todos">
+        <li class="todo-list">
+          Dental Appointment
+          <button class="delete" title="delete">X</button>
+        </li>
+        <li class="todo-list">
+          Grocery Store <button class="delete" title="delete">X</button>
+        </li>
+        <li class="todo-list">
+          Parent's Meeting <button class="delete" title="delete">X</button>
+        </li>
+        <li class="todo-list">
+          Go to playground <button class="delete" title="delete">X</button>
+        </li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
