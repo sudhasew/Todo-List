@@ -28,22 +28,29 @@ function addTodo(e) {
 
 function removeTodo(e) {
   if (e.target.classList.contains("delete")) {
-    if (confirm("Are you sure?")) {
-      var li = e.target.parentElement;
-      todoItems.removeChild(li);
-    }
+    alert(
+      `You want to delete ${e.target.parentElement.firstChild.textContent.trim()} ?`
+    );
+    var li = e.target.parentElement;
+    todoItems.removeChild(li);
   }
 }
 
 function filterTodo(e) {
   var text = e.target.value.toLowerCase();
   var todos = todoItems.getElementsByTagName("li");
+  var flag = false;
   Array.from(todos).forEach((todo) => {
     var todoName = todo.firstChild.textContent;
     if (todoName.toLocaleLowerCase().indexOf(text) != -1) {
+      flag = true;
       todo.style.display = "flex";
+      todo.style.alignItems = "center";
     } else {
       todo.style.display = "none";
     }
   });
+  if (!flag) {
+    alert("No Matches found");
+  }
 }
