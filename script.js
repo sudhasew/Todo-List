@@ -4,35 +4,78 @@ const filter = document.getElementById("filter-todo");
 
 // Event Listeners
 myForm.addEventListener("submit", addTodo);
-todoItems.addEventListener("click", removeTodo);
 filter.addEventListener("keyup", filterTodo);
+
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "deleteBtn";
+  span.title = "delete";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var deleteBtn = document.getElementsByClassName("deleteBtn");
+var i;
+for (i = 0; i < deleteBtn.length; i++) {
+  deleteBtn[i].onclick = function (e) {
+    alert(
+      `Are you sure to delete ${e.target.parentElement.firstChild.textContent}`
+    );
+    var div = e.target.parentElement;
+    div.style.display = "none";
+  };
+}
+
+// Add a "checked" symbol when clicking on a list item
+var listChecked = document.querySelector("ul");
+listChecked.addEventListener(
+  "click",
+  function (e) {
+    if (e.target.tagName === "LI") {
+      e.target.classList.toggle("checked");
+    }
+  },
+  false
+);
 
 // Functions
 function addTodo(e) {
   e.preventDefault();
-  var newTodo = document.getElementById("todo-text");
+  var newTodo = document.getElementById("todoInput").value;
+
   var li = document.createElement("li");
-  var delBtn = document.createElement("button");
 
-  li.className = "todo-list";
-  delBtn.className = "delete";
-  delBtn.title = "delete";
+  li.className = "todoInput";
 
-  li.appendChild(document.createTextNode(newTodo.value));
-  delBtn.appendChild(document.createTextNode("X"));
+  li.appendChild(document.createTextNode(newTodo));
 
-  li.appendChild(delBtn);
-  todoItems.appendChild(li);
-  newTodo.value = "";
-}
+  if (newTodo === "") {
+    alert("You must write something!");
+  } else {
+    document.getElementById("todos").appendChild(li);
+  }
+  document.getElementById("todoInput").value = "";
 
-function removeTodo(e) {
-  if (e.target.classList.contains("delete")) {
-    alert(
-      `You want to delete ${e.target.parentElement.firstChild.textContent.trim()} ?`
-    );
-    var li = e.target.parentElement;
-    todoItems.removeChild(li);
+  var span = document.createElement("SPAN");
+
+  var txt = document.createTextNode("\u00D7");
+
+  span.className = "deleteBtn";
+
+  span.appendChild(txt);
+
+  li.appendChild(span);
+
+  for (i = 0; i < deleteBtn.length; i++) {
+    close[i].onclick = function () {
+      var div = this.parentElement;
+      div.style.display = "none";
+    };
   }
 }
 
