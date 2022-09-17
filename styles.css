@@ -83,7 +83,7 @@ button {
 }
 
 #submit:hover {
-  opacity: 0.6;
+  background-color: #bbb;
 }
 
 .filter-option {
