@@ -82,11 +82,27 @@ function filterTodo(e) {
   Array.from(todos).forEach((todo) => {
     var todoName = todo.firstChild.textContent;
     if (todoName.toLocaleLowerCase().indexOf(text) != -1) {
-      flag = true;
-      todo.style.display = "flex";
-      todo.style.alignItems = "center";
-    } else {
-      todo.style.display = "none";
+      switch (e.target.value) {
+        case "all":
+          flag = true;
+          todo.style.display = "flex";
+          todo.style.alignItems = "center";
+          break;
+        case "completed":
+          if (todo.children[0].classList.contains("completed")) {
+            todo.style.display = "flex";
+          } else {
+            todo.style.display = "none";
+          }
+          break;
+        case "uncompleted":
+          if (todo.children[0].classList.contains("completed")) {
+            todo.style.display = "none";
+          } else {
+            todo.style.display = "flex";
+          }
+          break;
+      }
     }
   });
   if (!flag) {

@@ -86,6 +86,17 @@ button {
   opacity: 0.6;
 }
 
+.filter-option {
+  padding: 8px 10px;
+  background-color: rgb(63, 62, 62);
+  border: 1px solid black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 1;
+  letter-spacing: 2px;
+}
+
 #todos {
   border: 1px solid gray;
 }
