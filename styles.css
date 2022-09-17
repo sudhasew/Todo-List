@@ -113,7 +113,6 @@ ul li:hover {
   background: #ddd;
 }
 
-/* When clicked on, add a background color and strike out text */
 ul li.checked {
   background: #888;
   color: #fff;

@@ -4,10 +4,12 @@ const filter = document.getElementById("filter-todo");
 
 // Event Listeners
 myForm.addEventListener("submit", addTodo);
+todoItems.addEventListener("click", listChecked);
+todoItems.addEventListener("click", removeItem);
 filter.addEventListener("keyup", filterTodo);
 
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
+// Create a "delete" button and append it to each list item
+var myNodelist = document.getElementsByTagName("li");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
   var span = document.createElement("SPAN");
@@ -18,40 +20,38 @@ for (i = 0; i < myNodelist.length; i++) {
   myNodelist[i].appendChild(span);
 }
 
-// Click on a close button to hide the current list item
 var deleteBtn = document.getElementsByClassName("deleteBtn");
 var i;
-for (i = 0; i < deleteBtn.length; i++) {
-  deleteBtn[i].onclick = function (e) {
-    alert(
-      `Are you sure to delete ${e.target.parentElement.firstChild.textContent}`
-    );
-    var div = e.target.parentElement;
-    div.style.display = "none";
-  };
+function removeItem(e) {
+  if (e.target.classList.contains("deleteBtn")) {
+    if (
+      confirm(
+        `Are you sure to delete "${e.target.parentElement.firstChild.textContent}" from your todo list`
+      )
+    ) {
+      for (i = 0; i < deleteBtn.length; i++) {
+        var div = e.target.parentElement;
+        div.style.display = "none";
+      }
+    }
+  }
 }
 
 // Add a "checked" symbol when clicking on a list item
-var listChecked = document.querySelector("ul");
-listChecked.addEventListener(
-  "click",
-  function (e) {
-    if (e.target.tagName === "LI") {
-      e.target.classList.toggle("checked");
-    }
-  },
-  false
-);
+function listChecked(e) {
+  if (e.target.tagName === "LI") {
+    e.target.classList.toggle("checked");
+  }
+  false;
+}
 
-// Functions
+// Add New todo to the list
 function addTodo(e) {
   e.preventDefault();
   var newTodo = document.getElementById("todoInput").value;
 
   var li = document.createElement("li");
-
   li.className = "todoInput";
-
   li.appendChild(document.createTextNode(newTodo));
 
   if (newTodo === "") {
@@ -61,14 +61,10 @@ function addTodo(e) {
   }
   document.getElementById("todoInput").value = "";
 
-  var span = document.createElement("SPAN");
-
+  var span = document.createElement("span");
   var txt = document.createTextNode("\u00D7");
-
   span.className = "deleteBtn";
-
   span.appendChild(txt);
-
   li.appendChild(span);
 
   for (i = 0; i < deleteBtn.length; i++) {
@@ -94,6 +90,6 @@ function filterTodo(e) {
     }
   });
   if (!flag) {
-    alert("No Matches found");
+    alert(`No Matches found on letter ${e.target.value} `);
   }
 }
